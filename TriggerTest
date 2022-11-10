@@ -1,0 +1,49 @@
+@isTest
+private class UpdateSA1TrainingTriggertest {
+    
+    @isTest
+    private static void UpdateSA1Training(){
+        
+        
+        Contact con = new Contact();
+        
+        con.FirstName = 'Test';
+        con.LastName = 'Mission';      
+        con.Prior_Qualification__c = 'Below Tertiary';
+        con.Enrolment_Progression__c = 'Advanced';
+        
+        insert con;
+        
+        List<Enrolment__c>Istjunc =[SELECT Id, StudentName__c From Enrolment__c where StudentName__r.Id =: con.id];
+        
+        system.AssertNotEquals(Istjunc.Size(),null);
+        
+    }   
+    
+
+}
+
+////
+
+@isTest
+ private class Mission6SA1triggerTest {
+     
+  @isTest
+     private static void testMission6SA1Trigger(){
+       
+     Contact con = new Contact();
+     
+     con.FirstName = 'Test Student';
+     con.LastName = 'Missionsix';       
+     con.Prior_Qualification__c = 'Below Tertiary';
+     con.Enrolment_Progression__c = 'Extra';
+     
+     insert con;
+         
+ List<Enrolment__c> conList = [SELECT Id, StudentName__c,CourseName__c FROM Enrolment__c where StudentName__c=:con.Id];
+ 
+ system.Assertequals('a005h00000eRTRjAAO',conList[0].CourseName__c);        
+         
+     }
+
+}
