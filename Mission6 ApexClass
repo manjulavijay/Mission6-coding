@@ -1,0 +1,34 @@
+public class UpdateStudentCourse {
+    // New apex class and update studentrecord point 6
+  // NewList created to store  updated contactList
+  // Update Enrolment progression to Advanced for Below Tertiary
+  // Update Enrolment progression to Ultimate for Tertiary Graduate
+  // Update Enrolment progression to Extra for Tertiary Post-Graduate
+  
+    public static List<Contact> updateStudentco(){
+        
+        List<Contact> contactList = [SELECT Id, Prior_Qualification__c FROM Contact];
+        List<Contact> updatedContactList = new List<Contact>();
+        
+        for(contact ctc:contactList){
+            if(ctc.Prior_Qualification__C == 'Below Tertiary'){
+                ctc.Enrolment_Progression__C = 'Advanced';
+                updatedContactList.add(ctc);
+            }
+            
+            if(ctc.Prior_Qualification__c == 'Tertiary Graduate'){
+                ctc.Enrolment_Progression__c = 'Ultimate';
+                updatedContactList.add(ctc);
+            }
+            if(ctc.Prior_Qualification__C == 'Tertiary Post-Graduate'){
+                ctc.Enrolment_Progression__c = 'Extra';
+                updatedContactList.add(ctc);
+            }
+        }
+            
+            update updatedContactList;
+            return updatedContactList;
+          
+    }
+
+}
