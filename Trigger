@@ -1,0 +1,45 @@
+trigger UpdateSA1Training on Contact (before insert) {
+    
+     List<Enrolment__c> ec = New List<Enrolment__C>();            
+                
+    for(Contact con : Trigger.new){
+    
+        Enrolment__c enrol = New Enrolment__c();
+            
+                   enrol.CourseName__c = 'a005h00000eRTRjAAO';            
+                    enrol.StudentName__c = con.id;            
+                        
+        ec.add(enrol);
+    }    
+        
+    if(ec.size() > 0){    
+        insert ec;
+    }            
+            
+}
+
+/////
+trigger Mission6SA1Trigger on Contact (before insert,before update, After Insert, After Update) {
+    
+    for(Contact con:Trigger.new){
+        
+        if(Trigger.isafter){
+            
+            if(Trigger.isinsert){
+                                
+    List<Course__c> CourseList =[SELECT Id,Name From Course__c];  
+    
+     Enrolment__c newstudent = new Enrolment__c();
+     newstudent.CourseName__c = 'a005h00000eRTRjAAO';
+     newstudent.StudentName__c = con.Id;   
+     
+     insert newstudent;                                                     
+                        
+                
+            }             
+        }                
+        
+    }
+      
+    
+}
