@@ -1,0 +1,38 @@
+@isTest
+//3 unit tests to test your class
+//new contact called con for student3 st3 -> Tertiary Post-Graduate to Advanced
+//new contact called con1 for student4 st4 -> Tertiary Graduate to Ultimate
+//new contact called con2 for student5 st5 -> Below Tertiary to Extra
+private Class UpdateStudentCourseTest {
+    @isTest  
+        private static void testupdatestudentrecord(){
+            Contact con = new Contact();
+            Con.firstName = 'Student3';
+            Con.LastName = 'St3' ;
+            con.Prior_Qualification__c = 'Tertiary Post-Graduate';
+            con.Enrolment_Progression__c = 'Advanced';
+            Insert con;
+            
+            Contact con1 = new Contact();
+            Con1.firstName = 'Student4';
+            Con1.LastName = 'St4' ;
+            con1.Prior_Qualification__c = 'Tertiary Graduate';
+            con1.Enrolment_Progression__c = 'Ultimate';
+            Insert con1; 
+                          
+            Contact con2 = new Contact();
+            Con2.firstName = 'Student5';
+            Con2.LastName = 'St5' ;
+            con2.Prior_Qualification__c = 'Below Tertiary';
+            con2.Enrolment_Progression__c = 'Extra';
+            Insert con2;
+         
+            List<Contact> output = UpdateStudentCourse.updateStudentco();
+            List<Contact> contactList = [SELECT Id, Enrolment_Progression__C FROM Contact];
+           
+            system.AssertEquals('Advanced',con.Enrolment_Progression__c);
+            system.AssertEquals('Ultimate',con1.Enrolment_Progression__c);
+            system.AssertEquals('Extra',con2.Enrolment_Progression__c);                                                            
+                
+  } 
+}
